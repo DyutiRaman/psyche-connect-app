@@ -10,7 +10,18 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { CalendarIcon } from 'lucide-react'
 import { format } from 'date-fns'
 import { cn } from '@/lib/utils'
-import { supabase, type Booking } from '@/lib/supabase'
+import { supabase } from '@/integrations/supabase/client'
+
+type Booking = {
+  id?: string
+  name: string
+  email: string
+  phone: string
+  preferred_time: string
+  call_type: 'video' | 'voice'
+  status: 'pending' | 'confirmed' | 'cancelled'
+  created_at?: string
+}
 import { useToast } from '@/hooks/use-toast'
 
 export const BookingForm = () => {

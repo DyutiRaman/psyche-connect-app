@@ -4,7 +4,18 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 import { Badge } from '@/components/ui/badge'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { supabase, type Booking } from '@/lib/supabase'
+import { supabase } from '@/integrations/supabase/client'
+
+type Booking = {
+  id?: string
+  name: string
+  email: string
+  phone: string
+  preferred_time: string
+  call_type: 'video' | 'voice'
+  status: 'pending' | 'confirmed' | 'cancelled'
+  created_at?: string
+}
 import { useToast } from '@/hooks/use-toast'
 import { LogOut, Calendar, Phone, Video, Users } from 'lucide-react'
 import { format } from 'date-fns'
@@ -30,7 +41,7 @@ export const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
         .order('created_at', { ascending: false })
 
       if (error) throw error
-      setBookings(data || [])
+      setBookings(data as Booking[] || [])
     } catch (error) {
       toast({
         title: "Error",
