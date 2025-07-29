@@ -5,7 +5,13 @@ import { AdminDashboard } from '@/components/AdminDashboard'
 import { supabase } from '@/integrations/supabase/client'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { Calendar, Shield, Users } from 'lucide-react'
+import { Calendar, Shield, Users, Heart, Star, Quote } from 'lucide-react'
+
+// Import warm, inviting images
+import drNidhiPhoto from '@/assets/dr-nidhi-raman.jpg'
+import warmForestLights from '@/assets/warm-forest-lights.jpg'
+import cozyLivingRoom from '@/assets/cozy-living-room.jpg'
+import peacefulNature from '@/assets/peaceful-nature.jpg'
 
 const Index = () => {
   const [view, setView] = useState<'home' | 'booking' | 'admin-login' | 'admin-dashboard'>('home')
@@ -45,105 +51,203 @@ const Index = () => {
 
   return (
     <div className="min-h-screen" style={{ background: 'var(--gradient-hero)' }}>
-      {/* Hero Section */}
-      <section className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-20 relative">
-          <div className="text-center">
-            <div className="mb-8">
-              <h2 className="text-lg font-medium text-primary mb-2">Dr. Nidhi Raman</h2>
-              <p className="text-sm text-muted-foreground">Licensed Clinical Psychologist</p>
+      {/* Hero Section with Background Image */}
+      <section className="relative overflow-hidden min-h-screen flex items-center">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10"
+          style={{ 
+            backgroundImage: `url(${warmForestLights})`,
+            filter: 'sepia(30%) saturate(120%) hue-rotate(-10deg)'
+          }}
+        ></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/85 to-background/95"></div>
+        
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            
+            {/* Left Column - Content */}
+            <div className="text-center lg:text-left">
+              <div className="mb-8">
+                <div className="inline-flex items-center px-4 py-2 rounded-full bg-accent/50 border border-primary/20 mb-4">
+                  <Heart className="h-4 w-4 text-primary mr-2" />
+                  <span className="text-sm font-medium text-primary">Compassionate Care</span>
+                </div>
+                <h2 className="text-2xl font-semibold text-primary mb-2">Dr. Nidhi Raman</h2>
+                <p className="text-muted-foreground">Licensed Clinical Psychologist • 10+ Years Experience</p>
+              </div>
+              
+              <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-8 leading-tight">
+                A Safe Space for
+                <span className="block bg-gradient-to-r from-primary via-primary to-accent-foreground bg-clip-text text-transparent">
+                  Your Healing Journey
+                </span>
+              </h1>
+              
+              <p className="text-xl text-muted-foreground mb-10 leading-relaxed max-w-2xl">
+                Experience gentle, evidence-based therapy in a warm and welcoming environment. 
+                Together, we'll navigate life's challenges and unlock your inner strength.
+              </p>
+              
+              <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
+                <Button 
+                  size="lg" 
+                  onClick={() => setView('booking')}
+                  className="text-lg px-10 py-6 shadow-lg hover:shadow-xl transition-all duration-500 group"
+                  style={{ 
+                    background: 'var(--gradient-primary)',
+                    boxShadow: 'var(--shadow-warm)' 
+                  }}
+                >
+                  <Calendar className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+                  Begin Your Journey
+                </Button>
+                <Button 
+                  variant="outline" 
+                  size="lg"
+                  onClick={() => setView('admin-login')}
+                  className="text-lg px-10 py-6 border-2 border-primary/30 hover:border-primary/50 bg-background/60 backdrop-blur-sm transition-all duration-500"
+                >
+                  <Shield className="mr-2 h-5 w-5" />
+                  Admin Portal
+                </Button>
+              </div>
             </div>
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-8 leading-tight">
-              Transform Your Mind,
-              <span className="block bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-                Transform Your Life
-              </span>
-            </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed">
-              Professional psychological support through secure video and voice sessions. 
-              Take the first step towards better mental health in a safe, confidential environment.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <Button 
-                size="lg" 
-                onClick={() => setView('booking')}
-                className="text-lg px-10 py-6 shadow-lg hover:shadow-xl transition-all duration-300"
-                style={{ 
-                  background: 'var(--gradient-primary)',
-                  boxShadow: 'var(--shadow-elegant)' 
-                }}
-              >
-                <Calendar className="mr-2 h-5 w-5" />
-                Book Your Session
-              </Button>
-              <Button 
-                variant="outline" 
-                size="lg"
-                onClick={() => setView('admin-login')}
-                className="text-lg px-10 py-6 border-2 border-primary/20 hover:border-primary/40 bg-background/50 backdrop-blur-sm transition-all duration-300"
-              >
-                <Shield className="mr-2 h-5 w-5" />
-                Admin Portal
-              </Button>
+            
+            {/* Right Column - Doctor's Photo */}
+            <div className="flex justify-center lg:justify-end">
+              <div className="relative">
+                <div 
+                  className="w-80 h-80 rounded-3xl overflow-hidden shadow-2xl"
+                  style={{ boxShadow: 'var(--shadow-cozy)' }}
+                >
+                  <img 
+                    src={drNidhiPhoto} 
+                    alt="Dr. Nidhi Raman - Licensed Clinical Psychologist"
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="absolute -bottom-6 -right-6 bg-primary/10 backdrop-blur-sm rounded-2xl p-4 border border-primary/20">
+                  <div className="flex items-center space-x-1">
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} className="h-4 w-4 fill-primary text-primary" />
+                    ))}
+                  </div>
+                  <p className="text-sm text-primary font-medium mt-1">Trusted by 500+ clients</p>
+                </div>
+              </div>
             </div>
+            
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
+      {/* About Section */}
       <section className="py-20 relative">
-        <div className="absolute inset-0 bg-background/80 backdrop-blur-sm"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-5"
+          style={{ 
+            backgroundImage: `url(${peacefulNature})`,
+            filter: 'sepia(40%) saturate(120%) hue-rotate(-20deg)'
+          }}
+        ></div>
+        <div className="absolute inset-0" style={{ background: 'var(--gradient-warm)' }}></div>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">Why Choose Dr. Nidhi Raman?</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">A Warm Welcome Awaits You</h2>
+            <p className="text-muted-foreground text-lg max-w-3xl mx-auto leading-relaxed">
+              Step into a space designed for healing, growth, and genuine connection. Every session is tailored 
+              to honor your unique story and support your personal journey toward wellness.
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <div className="relative rounded-3xl overflow-hidden" style={{ boxShadow: 'var(--shadow-cozy)' }}>
+                <img 
+                  src={cozyLivingRoom} 
+                  alt="Comfortable therapy setting"
+                  className="w-full h-80 object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
+              </div>
+            </div>
+            
+            <div className="space-y-6">
+              <div className="bg-card/70 backdrop-blur-sm rounded-2xl p-6 border border-primary/10" style={{ boxShadow: 'var(--shadow-soft)' }}>
+                <Quote className="h-8 w-8 text-primary mb-4" />
+                <blockquote className="text-lg text-foreground font-medium mb-4 italic">
+                  "Healing is not about returning to who you were, but about becoming who you're meant to be."
+                </blockquote>
+                <cite className="text-primary font-semibold">— Dr. Nidhi Raman</cite>
+              </div>
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div className="text-center bg-card/50 rounded-xl p-4">
+                  <div className="text-2xl font-bold text-primary mb-1">500+</div>
+                  <div className="text-sm text-muted-foreground">Lives Transformed</div>
+                </div>
+                <div className="text-center bg-card/50 rounded-xl p-4">
+                  <div className="text-2xl font-bold text-primary mb-1">10+</div>
+                  <div className="text-sm text-muted-foreground">Years Experience</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+          
+      {/* Services Section */}
+      <section className="py-20 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">How We Support Your Journey</h2>
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Experience compassionate, evidence-based therapy tailored to your unique needs
+              Discover personalized approaches designed to meet you exactly where you are
             </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-card/70 backdrop-blur-sm">
+            <Card className="border-0 hover:shadow-xl transition-all duration-500 bg-card/70 backdrop-blur-sm group" style={{ boxShadow: 'var(--shadow-soft)' }}>
               <CardHeader className="text-center pb-2">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ background: 'var(--gradient-soft)' }}>
-                  <Calendar className="h-8 w-8 text-primary" />
+                <div className="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center transition-all duration-500 group-hover:scale-110" style={{ background: 'var(--gradient-soft)' }}>
+                  <Calendar className="h-10 w-10 text-primary" />
                 </div>
-                <CardTitle className="text-xl">Flexible Scheduling</CardTitle>
+                <CardTitle className="text-xl mb-2">Flexible Sessions</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-center text-base leading-relaxed">
-                  Book appointments that fit your schedule with our intuitive online system. 
-                  Choose between video or voice sessions based on your comfort level.
+                  Choose between in-person, video, or phone sessions that work with your schedule. 
+                  Your comfort and convenience are always prioritized.
                 </CardDescription>
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-card/70 backdrop-blur-sm">
+            <Card className="border-0 hover:shadow-xl transition-all duration-500 bg-card/70 backdrop-blur-sm group" style={{ boxShadow: 'var(--shadow-soft)' }}>
               <CardHeader className="text-center pb-2">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ background: 'var(--gradient-soft)' }}>
-                  <Users className="h-8 w-8 text-primary" />
+                <div className="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center transition-all duration-500 group-hover:scale-110" style={{ background: 'var(--gradient-soft)' }}>
+                  <Heart className="h-10 w-10 text-primary" />
                 </div>
-                <CardTitle className="text-xl">Expert Care</CardTitle>
+                <CardTitle className="text-xl mb-2">Compassionate Approach</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-center text-base leading-relaxed">
-                  Dr. Nidhi Raman brings years of experience in clinical psychology, 
-                  specializing in evidence-based therapeutic approaches.
+                  Experience therapy rooted in empathy, understanding, and genuine care. 
+                  Every session is a judgment-free space for authentic healing.
                 </CardDescription>
               </CardContent>
             </Card>
 
-            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-card/70 backdrop-blur-sm">
+            <Card className="border-0 hover:shadow-xl transition-all duration-500 bg-card/70 backdrop-blur-sm group" style={{ boxShadow: 'var(--shadow-soft)' }}>
               <CardHeader className="text-center pb-2">
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ background: 'var(--gradient-soft)' }}>
-                  <Shield className="h-8 w-8 text-primary" />
+                <div className="w-20 h-20 mx-auto mb-6 rounded-full flex items-center justify-center transition-all duration-500 group-hover:scale-110" style={{ background: 'var(--gradient-soft)' }}>
+                  <Shield className="h-10 w-10 text-primary" />
                 </div>
-                <CardTitle className="text-xl">Complete Privacy</CardTitle>
+                <CardTitle className="text-xl mb-2">Complete Confidentiality</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription className="text-center text-base leading-relaxed">
-                  Your confidentiality is paramount. All sessions are conducted 
-                  through secure, HIPAA-compliant platforms ensuring your privacy.
+                  Your privacy is sacred. All communications are protected by strict confidentiality 
+                  standards and secure, HIPAA-compliant technology.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -152,25 +256,33 @@ const Index = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 relative">
-        <div className="absolute inset-0" style={{ background: 'var(--gradient-soft)' }}></div>
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Begin Your Journey?</h2>
+      <section className="py-20 relative overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center opacity-8"
+          style={{ 
+            backgroundImage: `url(${warmForestLights})`,
+            filter: 'sepia(50%) saturate(130%) hue-rotate(-15deg) brightness(1.1)'
+          }}
+        ></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-background/90 to-primary/10"></div>
+        
+        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative z-10">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Take the First Step Today</h2>
           <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
-            Taking the first step is often the hardest. Let Dr. Nidhi Raman guide you towards 
-            improved mental wellness and personal growth.
+            Your journey toward healing and growth begins with a single step. 
+            Let's walk this path together, at your pace, with compassion and understanding.
           </p>
           <Button 
             size="lg" 
             onClick={() => setView('booking')}
-            className="text-lg px-12 py-6 shadow-lg hover:shadow-xl transition-all duration-300"
+            className="text-lg px-12 py-6 hover:shadow-2xl transition-all duration-500 group"
             style={{ 
               background: 'var(--gradient-primary)',
-              boxShadow: 'var(--shadow-elegant)' 
+              boxShadow: 'var(--shadow-warm)' 
             }}
           >
-            <Calendar className="mr-2 h-5 w-5" />
-            Book Your First Session
+            <Calendar className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
+            Schedule Your First Session
           </Button>
         </div>
       </section>
