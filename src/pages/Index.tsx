@@ -44,36 +44,47 @@ const Index = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background to-accent/10">
+    <div className="min-h-screen" style={{ background: 'var(--gradient-hero)' }}>
       {/* Hero Section */}
       <section className="relative overflow-hidden">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16">
+        <div className="absolute inset-0 bg-grid-pattern opacity-5"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-20 relative">
           <div className="text-center">
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-6">
-              Professional Psychology
-              <span className="block text-primary">Practice</span>
+            <div className="mb-8">
+              <h2 className="text-lg font-medium text-primary mb-2">Dr. Nidhi Raman</h2>
+              <p className="text-sm text-muted-foreground">Licensed Clinical Psychologist</p>
+            </div>
+            <h1 className="text-4xl md:text-6xl font-bold tracking-tight mb-8 leading-tight">
+              Transform Your Mind,
+              <span className="block bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+                Transform Your Life
+              </span>
             </h1>
-            <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-              Book your consultation with our licensed psychologist. We offer both video and voice sessions 
-              to provide you with the support you need in a comfortable environment.
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-10 leading-relaxed">
+              Professional psychological support through secure video and voice sessions. 
+              Take the first step towards better mental health in a safe, confidential environment.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Button 
                 size="lg" 
                 onClick={() => setView('booking')}
-                className="text-lg px-8 py-6"
+                className="text-lg px-10 py-6 shadow-lg hover:shadow-xl transition-all duration-300"
+                style={{ 
+                  background: 'var(--gradient-primary)',
+                  boxShadow: 'var(--shadow-elegant)' 
+                }}
               >
                 <Calendar className="mr-2 h-5 w-5" />
-                Book Appointment
+                Book Your Session
               </Button>
               <Button 
                 variant="outline" 
                 size="lg"
                 onClick={() => setView('admin-login')}
-                className="text-lg px-8 py-6"
+                className="text-lg px-10 py-6 border-2 border-primary/20 hover:border-primary/40 bg-background/50 backdrop-blur-sm transition-all duration-300"
               >
                 <Shield className="mr-2 h-5 w-5" />
-                Admin Login
+                Admin Portal
               </Button>
             </div>
           </div>
@@ -81,51 +92,58 @@ const Index = () => {
       </section>
 
       {/* Features Section */}
-      <section className="py-16 bg-card/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Why Choose Our Practice?</h2>
-            <p className="text-muted-foreground text-lg">
-              We're committed to providing accessible, professional mental health support
+      <section className="py-20 relative">
+        <div className="absolute inset-0 bg-background/80 backdrop-blur-sm"></div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">Why Choose Dr. Nidhi Raman?</h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Experience compassionate, evidence-based therapy tailored to your unique needs
             </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <Card>
-              <CardHeader className="text-center">
-                <Calendar className="h-12 w-12 text-primary mx-auto mb-4" />
-                <CardTitle>Easy Scheduling</CardTitle>
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-card/70 backdrop-blur-sm">
+              <CardHeader className="text-center pb-2">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ background: 'var(--gradient-soft)' }}>
+                  <Calendar className="h-8 w-8 text-primary" />
+                </div>
+                <CardTitle className="text-xl">Flexible Scheduling</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription className="text-center">
-                  Book appointments online with our simple scheduling system. 
-                  Choose your preferred time and session type.
+                <CardDescription className="text-center text-base leading-relaxed">
+                  Book appointments that fit your schedule with our intuitive online system. 
+                  Choose between video or voice sessions based on your comfort level.
                 </CardDescription>
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader className="text-center">
-                <Users className="h-12 w-12 text-primary mx-auto mb-4" />
-                <CardTitle>Licensed Professional</CardTitle>
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-card/70 backdrop-blur-sm">
+              <CardHeader className="text-center pb-2">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ background: 'var(--gradient-soft)' }}>
+                  <Users className="h-8 w-8 text-primary" />
+                </div>
+                <CardTitle className="text-xl">Expert Care</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription className="text-center">
-                  Work with our experienced, licensed psychologist who is 
-                  dedicated to your mental health and wellbeing.
+                <CardDescription className="text-center text-base leading-relaxed">
+                  Dr. Nidhi Raman brings years of experience in clinical psychology, 
+                  specializing in evidence-based therapeutic approaches.
                 </CardDescription>
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader className="text-center">
-                <Shield className="h-12 w-12 text-primary mx-auto mb-4" />
-                <CardTitle>Secure & Confidential</CardTitle>
+            <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 bg-card/70 backdrop-blur-sm">
+              <CardHeader className="text-center pb-2">
+                <div className="w-16 h-16 mx-auto mb-4 rounded-full flex items-center justify-center" style={{ background: 'var(--gradient-soft)' }}>
+                  <Shield className="h-8 w-8 text-primary" />
+                </div>
+                <CardTitle className="text-xl">Complete Privacy</CardTitle>
               </CardHeader>
               <CardContent>
-                <CardDescription className="text-center">
-                  Your privacy is our priority. All sessions are conducted 
-                  with the highest level of confidentiality and security.
+                <CardDescription className="text-center text-base leading-relaxed">
+                  Your confidentiality is paramount. All sessions are conducted 
+                  through secure, HIPAA-compliant platforms ensuring your privacy.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -134,19 +152,25 @@ const Index = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16">
-        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
-          <p className="text-xl text-muted-foreground mb-8">
-            Take the first step towards better mental health. Book your consultation today.
+      <section className="py-20 relative">
+        <div className="absolute inset-0" style={{ background: 'var(--gradient-soft)' }}></div>
+        <div className="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8 relative">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6">Ready to Begin Your Journey?</h2>
+          <p className="text-xl text-muted-foreground mb-10 max-w-2xl mx-auto leading-relaxed">
+            Taking the first step is often the hardest. Let Dr. Nidhi Raman guide you towards 
+            improved mental wellness and personal growth.
           </p>
           <Button 
             size="lg" 
             onClick={() => setView('booking')}
-            className="text-lg px-8 py-6"
+            className="text-lg px-12 py-6 shadow-lg hover:shadow-xl transition-all duration-300"
+            style={{ 
+              background: 'var(--gradient-primary)',
+              boxShadow: 'var(--shadow-elegant)' 
+            }}
           >
             <Calendar className="mr-2 h-5 w-5" />
-            Schedule Your Session
+            Book Your First Session
           </Button>
         </div>
       </section>
