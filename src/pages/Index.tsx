@@ -70,7 +70,7 @@ const Index = () => {
               <div className="mb-8">
                 <div className="inline-flex items-center px-4 py-2 rounded-full bg-accent/50 border border-primary/20 mb-4">
                   <Heart className="h-4 w-4 text-primary mr-2" />
-                  <span className="text-sm font-medium text-primary">Compassionate Care</span>
+                  <span className="text-sm font-medium text-primary">Saathi Mindcare</span>
                 </div>
                 <h2 className="text-2xl font-semibold text-primary mb-2">Dr. Nidhi Raman</h2>
                 <p className="text-muted-foreground">Licensed Clinical Psychologist • 10+ Years Experience</p>
@@ -141,60 +141,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* About Section */}
-      <section className="py-20 relative">
-        <div 
-          className="absolute inset-0 bg-cover bg-center opacity-5"
-          style={{ 
-            backgroundImage: `url(${peacefulNature})`,
-            filter: 'sepia(40%) saturate(120%) hue-rotate(-20deg)'
-          }}
-        ></div>
-        <div className="absolute inset-0" style={{ background: 'var(--gradient-warm)' }}></div>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-foreground">A Warm Welcome Awaits You</h2>
-            <p className="text-muted-foreground text-lg max-w-3xl mx-auto leading-relaxed">
-              Step into a space designed for healing, growth, and genuine connection. Every session is tailored 
-              to honor your unique story and support your personal journey toward wellness.
-            </p>
-          </div>
-          
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <div className="relative rounded-3xl overflow-hidden" style={{ boxShadow: 'var(--shadow-cozy)' }}>
-                <img 
-                  src={cozyLivingRoom} 
-                  alt="Comfortable therapy setting"
-                  className="w-full h-80 object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
-              </div>
-            </div>
-            
-            <div className="space-y-6">
-              <div className="bg-card/70 backdrop-blur-sm rounded-2xl p-6 border border-primary/10" style={{ boxShadow: 'var(--shadow-soft)' }}>
-                <Quote className="h-8 w-8 text-primary mb-4" />
-                <blockquote className="text-lg text-foreground font-medium mb-4 italic">
-                  "Healing is not about returning to who you were, but about becoming who you're meant to be."
-                </blockquote>
-                <cite className="text-primary font-semibold">— Dr. Nidhi Raman</cite>
-              </div>
-              
-              <div className="grid grid-cols-2 gap-4">
-                <div className="text-center bg-card/50 rounded-xl p-4">
-                  <div className="text-2xl font-bold text-primary mb-1">500+</div>
-                  <div className="text-sm text-muted-foreground">Lives Transformed</div>
-                </div>
-                <div className="text-center bg-card/50 rounded-xl p-4">
-                  <div className="text-2xl font-bold text-primary mb-1">10+</div>
-                  <div className="text-sm text-muted-foreground">Years Experience</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
           
       {/* Services Section */}
       <section className="py-20 relative">

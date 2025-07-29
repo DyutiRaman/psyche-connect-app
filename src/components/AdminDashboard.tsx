@@ -17,8 +17,12 @@ type Booking = {
   created_at?: string
 }
 import { useToast } from '@/hooks/use-toast'
-import { LogOut, Calendar, Phone, Video, Users } from 'lucide-react'
+import { LogOut, Calendar, Phone, Video, Users, Mail, Link } from 'lucide-react'
 import { format } from 'date-fns'
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import { Input } from '@/components/ui/input'
+import { Label } from '@/components/ui/label'
+import { Textarea } from '@/components/ui/textarea'
 
 interface AdminDashboardProps {
   onLogout: () => void
@@ -27,6 +31,10 @@ interface AdminDashboardProps {
 export const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
   const [bookings, setBookings] = useState<Booking[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const [selectedBooking, setSelectedBooking] = useState<Booking | null>(null)
+  const [meetingLink, setMeetingLink] = useState('')
+  const [isEmailDialogOpen, setIsEmailDialogOpen] = useState(false)
+  const [isSendingEmail, setIsSendingEmail] = useState(false)
   const { toast } = useToast()
 
   useEffect(() => {
@@ -81,6 +89,42 @@ export const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
     }
   }
 
+  const sendBookingEmail = async (booking: Booking, type: 'confirmation' | 'reminder') => {
+    setIsSendingEmail(true)
+    try {
+      const { error } = await supabase.functions.invoke('send-booking-email', {
+        body: {
+          name: booking.name,
+          email: booking.email,
+          preferredTime: booking.preferred_time,
+          callType: booking.call_type,
+          meetingLink: meetingLink || undefined,
+          type: type
+        }
+      })
+
+      if (error) throw error
+
+      toast({
+        title: "Email Sent!",
+        description: `${type === 'confirmation' ? 'Confirmation' : 'Reminder'} email sent to ${booking.name}`,
+      })
+      
+      setIsEmailDialogOpen(false)
+      setMeetingLink('')
+      setSelectedBooking(null)
+    } catch (error) {
+      console.error('Email error:', error)
+      toast({
+        title: "Error",
+        description: "Failed to send email. Please try again.",
+        variant: "destructive"
+      })
+    } finally {
+      setIsSendingEmail(false)
+    }
+  }
+
   const handleLogout = async () => {
     await supabase.auth.signOut()
     onLogout()
@@ -123,7 +167,7 @@ export const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
       <header className="border-b bg-card">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
-            <h1 className="text-2xl font-bold">Admin Dashboard</h1>
+            <h1 className="text-2xl font-bold">Saathi Mindcare - Admin Dashboard</h1>
             <Button variant="outline" onClick={handleLogout}>
               <LogOut className="mr-2 h-4 w-4" />
               Logout
@@ -199,6 +243,7 @@ export const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
                     <TableHead>Appointment</TableHead>
                     <TableHead>Type</TableHead>
                     <TableHead>Status</TableHead>
+                    <TableHead>Email</TableHead>
                     <TableHead>Actions</TableHead>
                   </TableRow>
                 </TableHeader>
@@ -229,6 +274,20 @@ export const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
                       </TableCell>
                       <TableCell>{getStatusBadge(booking.status)}</TableCell>
                       <TableCell>
+                        <div className="flex gap-2">
+                          <Button
+                            size="sm"
+                            variant="outline"
+                            onClick={() => {
+                              setSelectedBooking(booking)
+                              setIsEmailDialogOpen(true)
+                            }}
+                          >
+                            <Mail className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      </TableCell>
+                      <TableCell>
                         <Select
                           value={booking.status}
                           onValueChange={(value) => updateBookingStatus(booking.id!, value as any)}
@@ -251,6 +310,51 @@ export const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
           </CardContent>
         </Card>
       </main>
+
+      {/* Email Dialog */}
+      <Dialog open={isEmailDialogOpen} onOpenChange={setIsEmailDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Send Email to {selectedBooking?.name}</DialogTitle>
+            <DialogDescription>
+              Send a booking confirmation or reminder email with optional meeting link.
+            </DialogDescription>
+          </DialogHeader>
+          
+          <div className="space-y-4">
+            <div>
+              <Label htmlFor="meeting-link">Meeting Link (Optional)</Label>
+              <div className="flex items-center space-x-2 mt-1">
+                <Link className="h-4 w-4 text-muted-foreground" />
+                <Input
+                  id="meeting-link"
+                  placeholder="https://meet.google.com/xxx-xxx-xxx"
+                  value={meetingLink}
+                  onChange={(e) => setMeetingLink(e.target.value)}
+                />
+              </div>
+            </div>
+
+            <div className="flex gap-3">
+              <Button 
+                onClick={() => selectedBooking && sendBookingEmail(selectedBooking, 'confirmation')}
+                disabled={isSendingEmail}
+                className="flex-1"
+              >
+                {isSendingEmail ? 'Sending...' : 'Send Confirmation'}
+              </Button>
+              <Button 
+                variant="outline"
+                onClick={() => selectedBooking && sendBookingEmail(selectedBooking, 'reminder')}
+                disabled={isSendingEmail}
+                className="flex-1"
+              >
+                {isSendingEmail ? 'Sending...' : 'Send Reminder'}
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
