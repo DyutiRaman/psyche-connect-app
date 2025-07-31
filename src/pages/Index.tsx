@@ -89,10 +89,9 @@ const Index = () => {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-6 justify-center lg:justify-start">
-                <Button 
-                  size="lg" 
-                  onClick={() => setView('booking')}
-                  className="text-lg px-10 py-6 shadow-lg hover:shadow-xl transition-all duration-500 group"
+                <a 
+                  href="/booking"
+                  className="inline-flex items-center justify-center text-lg px-10 py-6 shadow-lg hover:shadow-xl transition-all duration-500 group rounded-md font-medium text-primary-foreground"
                   style={{ 
                     background: 'var(--gradient-primary)',
                     boxShadow: 'var(--shadow-warm)' 
@@ -100,16 +99,14 @@ const Index = () => {
                 >
                   <Calendar className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
                   Begin Your Journey
-                </Button>
-                <Button 
-                  variant="outline" 
-                  size="lg"
-                  onClick={() => setView('admin-login')}
-                  className="text-lg px-10 py-6 border-2 border-primary/30 hover:border-primary/50 bg-background/60 backdrop-blur-sm transition-all duration-500"
+                </a>
+                <a 
+                  href="/admin-login"
+                  className="inline-flex items-center justify-center text-lg px-10 py-6 border-2 border-primary/30 hover:border-primary/50 bg-background/60 backdrop-blur-sm transition-all duration-500 rounded-md font-medium"
                 >
                   <Shield className="mr-2 h-5 w-5" />
                   Admin Portal
-                </Button>
+                </a>
               </div>
             </div>
             
@@ -218,10 +215,9 @@ const Index = () => {
             Your journey toward healing and growth begins with a single step. 
             Let's walk this path together, at your pace, with compassion and understanding.
           </p>
-          <Button 
-            size="lg" 
-            onClick={() => setView('booking')}
-            className="text-lg px-12 py-6 hover:shadow-2xl transition-all duration-500 group"
+          <a 
+            href="/booking"
+            className="inline-flex items-center justify-center text-lg px-12 py-6 hover:shadow-2xl transition-all duration-500 group rounded-md font-medium text-primary-foreground"
             style={{ 
               background: 'var(--gradient-primary)',
               boxShadow: 'var(--shadow-warm)' 
@@ -229,7 +225,7 @@ const Index = () => {
           >
             <Calendar className="mr-2 h-5 w-5 group-hover:scale-110 transition-transform" />
             Schedule Your First Session
-          </Button>
+          </a>
         </div>
       </section>
     </div>
