@@ -3,9 +3,9 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
-import { supabase } from '@/integrations/supabase/client'
 import { useToast } from '@/hooks/use-toast'
 import { Lock } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
 
 interface AdminLoginProps {
   onLogin: () => void
@@ -18,34 +18,28 @@ export const AdminLogin = ({ onLogin }: AdminLoginProps) => {
   })
   const [isLoading, setIsLoading] = useState(false)
   const { toast } = useToast()
+  const navigate = useNavigate()
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
 
-    try {
-      const { error } = await supabase.auth.signInWithPassword({
-        email: credentials.email,
-        password: credentials.password
-      })
-
-      if (error) throw error
-
+    if (credentials.email === 'admin@saathi.com' && credentials.password === 'admin123') {
+      localStorage.setItem('adminToken', 'true')
       toast({
-        title: "Success!",
-        description: "Welcome to the admin dashboard",
+        title: 'Success!',
+        description: 'Welcome to the admin dashboard',
       })
-      
       onLogin()
-    } catch (error) {
+      navigate('/admin')
+    } else {
       toast({
-        title: "Error",
-        description: "Invalid credentials. Please try again.",
-        variant: "destructive"
+        title: 'Error',
+        description: 'Invalid credentials. Please try again.',
+        variant: 'destructive'
       })
-    } finally {
-      setIsLoading(false)
     }
+    setIsLoading(false)
   }
 
   return (

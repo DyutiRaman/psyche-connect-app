@@ -34,10 +34,10 @@ const Contact = () => {
                 <div>
                   <p className="font-medium">Email</p>
                   <a 
-                    href="mailto:contact@saathimindcare.com" 
+                    href="mailto:psychnidhi@gmail.com" 
                     className="text-primary hover:underline"
                   >
-                    contact@saathimindcare.com
+                    psychnidhi@gmail.com
                   </a>
                 </div>
               </div>
@@ -47,10 +47,10 @@ const Contact = () => {
                 <div>
                   <p className="font-medium">Phone</p>
                   <a 
-                    href="tel:+919876543210" 
+                    href="tel:+918355817895" 
                     className="text-primary hover:underline"
                   >
-                    +91-98765-43210
+                    +918355817895
                   </a>
                 </div>
               </div>
@@ -60,12 +60,12 @@ const Contact = () => {
                 <div>
                   <p className="font-medium">Instagram</p>
                   <a 
-                    href="https://instagram.com/saathimindcare" 
+                    href="https://instagram.com/saathi_mindcarebynidhi" 
                     target="_blank" 
                     rel="noopener noreferrer"
                     className="text-primary hover:underline"
                   >
-                    @saathimindcare
+                    @saathi_mindcarebynidhi
                   </a>
                 </div>
               </div>
@@ -120,7 +120,7 @@ const Contact = () => {
           <CardContent className="text-center py-8">
             <h3 className="text-2xl font-semibold mb-4">Ready to start your journey?</h3>
             <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
-              Book an appointment with Dr. Nidhi Raman and take the first step towards better mental health.
+              Book an appointment with Nidhi Raman and take the first step towards better mental health.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button size="lg" className="bg-primary hover:bg-primary/90">
@@ -130,7 +130,7 @@ const Contact = () => {
                 </a>
               </Button>
               <Button variant="outline" size="lg">
-                <a href="mailto:contact@saathimindcare.com" className="flex items-center gap-2">
+                <a href="mailto:psychnidhi@gmail.com" className="flex items-center gap-2">
                   <Mail className="h-4 w-4" />
                   Send Email
                 </a>

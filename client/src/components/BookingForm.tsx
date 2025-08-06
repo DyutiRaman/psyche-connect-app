@@ -10,7 +10,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { CalendarIcon } from 'lucide-react'
 import { format } from 'date-fns'
 import { cn } from '@/lib/utils'
-import { supabase } from '@/integrations/supabase/client'
+// import { supabase } from '@/integrations/supabase/client'
 
 type Booking = {
   id?: string
@@ -62,11 +62,23 @@ export const BookingForm = () => {
         status: 'pending'
       }
 
-      const { error } = await supabase
+      /*const { error } = await supabase
         .from('bookings')
         .insert([booking])
 
-      if (error) throw error
+      if (error) throw error*/
+
+      const response = await fetch("http://localhost:5000/api/bookings", {
+        method: "POST",
+        headers: {  "Content-Type": "application/json"},
+        body: JSON.stringify(booking)
+        })
+
+      if (!response.ok) {
+        const err = await response.json()
+        throw new Error(err.message || "Unknown error")
+        }
+
 
       toast({
         title: "Success!",
