@@ -20,27 +20,52 @@ export const AdminLogin = ({ onLogin }: AdminLoginProps) => {
   const { toast } = useToast()
   const navigate = useNavigate()
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
+  const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsLoading(true);
 
-    if (credentials.email === 'admin@saathi.com' && credentials.password === 'admin123') {
-      localStorage.setItem('adminToken', 'true')
-      toast({
-        title: 'Success!',
-        description: 'Welcome to the admin dashboard',
-      })
-      onLogin()
-      navigate('/admin')
-    } else {
-      toast({
-        title: 'Error',
-        description: 'Invalid credentials. Please try again.',
-        variant: 'destructive'
-      })
+  try {
+    const response = await fetch("http://localhost:5000/api/admin/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(credentials),
+    });
+
+    const data = await response.json();
+    console.log("Login response:", data);
+
+    if (!response.ok || !data.token) {
+      throw new Error(data.message || "Invalid credentials");
     }
-    setIsLoading(false)
+
+    // Store token in localStorage
+    console.log("login successful, saving token....");
+    localStorage.setItem("adminToken", data.token);
+    console.log("actual Token saved:", data.token);
+    console.log("login response",data);
+
+    const test = localStorage.getItem("adminToken");
+    if (!test) {
+      throw new Error("Token not saved");
+    }
+
+    toast({
+      title: "Success!",
+      description: "Welcome to the admin dashboard",
+    });
+
+    onLogin(); // Triggers state update in App.tsx or wherever it’s used
+  } catch (error) {
+    toast({
+      title: "Error",
+      description: "Invalid credentials. Please try again.",
+      variant: "destructive",
+    });
+  } finally {
+    setIsLoading(false);
   }
+}
+
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-accent/20 flex items-center justify-center p-4">

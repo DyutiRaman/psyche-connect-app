@@ -2,6 +2,7 @@ import express from "express";
 import pool from "../db";
 import multer from "multer";
 import path from "path";
+import { verifyToken } from "../middleware/auth";
 
 const router = express.Router();
 
@@ -20,7 +21,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // GET all bookings
-router.get("/", async (req, res) => {
+router.get("/", verifyToken,async (req, res) => {
   try {
     const result = await pool.query("SELECT * FROM bookings ORDER BY created_at DESC");
     res.json(result.rows);

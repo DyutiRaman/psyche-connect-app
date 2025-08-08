@@ -6,7 +6,7 @@ D:.
 ³   package-lock.json
 ³   package.json
 ³   postcss.config.js
-³   structure-cliento.txt
+³   project-structure-client.txt
 ³   tailwind.config.ts
 ³   tsconfig.app.json
 ³   tsconfig.json
@@ -115,12 +115,11 @@ D:.
     ³   App.tsx
     ³   index.css
     ³   main.tsx
-    ³   structure-client.txt
     ³   vite-env.d.ts
     ³   
     ÃÄÄÄassets
     ³       cozy-living-room.jpg
-    ³       dr-nidhi-raman.jpg
+    ³       nidhi-raman.jpg
     ³       peaceful-nature.jpg
     ³       warm-forest-lights.jpg
     ³       
@@ -185,11 +184,6 @@ D:.
     ³       use-mobile.tsx
     ³       use-toast.ts
     ³       
-    ÃÄÄÄintegrations
-    ³   ÀÄÄÄsupabase
-    ³           client.ts
-    ³           types.ts
-    ³           
     ÃÄÄÄlib
     ³       utils.ts
     ³       

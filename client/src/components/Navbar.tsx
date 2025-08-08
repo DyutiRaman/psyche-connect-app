@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router-dom'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { Menu, Heart } from 'lucide-react'
-import { supabase } from '@/integrations/supabase/client'
 
 interface NavbarProps {
   isAuthenticated?: boolean
@@ -14,8 +13,8 @@ export const Navbar = ({ isAuthenticated, onLogout }: NavbarProps) => {
   const location = useLocation()
   const [isOpen, setIsOpen] = useState(false)
 
-  const handleLogout = async () => {
-    await supabase.auth.signOut()
+  const handleLogout = () => {
+    localStorage.removeItem('adminToken')
     onLogout?.()
   }
 
@@ -65,7 +64,7 @@ export const Navbar = ({ isAuthenticated, onLogout }: NavbarProps) => {
             )}
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile Menu */}
           <div className="md:hidden">
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
               <SheetTrigger asChild>

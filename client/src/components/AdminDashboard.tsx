@@ -45,17 +45,39 @@ export const AdminDashboard = ({ onLogout }: AdminDashboardProps) => {
   }, [])
 
   const fetchBookings = async () => {
-    try {
-      const response = await fetch("http://localhost:5000/api/bookings")
-      if (!response.ok) throw new Error("Failed to fetch bookings")
-      const data = await response.json()
-      setBookings(data)
-    } catch (error) {
-      toast({ title: "Error", description: "Failed to fetch bookings", variant: "destructive" })
-    } finally {
-      setIsLoading(false)
+  try {
+    console.log("checking admintoken in local strage", localStorage.getItem("adminToken"));
+    const token = localStorage.getItem("adminToken");
+    console.log("Fetching bookings with token:", token);
+
+    const response = await fetch("http://localhost:5000/api/bookings", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (response.status === 401) {
+      // If unauthorized, logout the admin
+      localStorage.removeItem("adminToken");
+      onLogout();
+      return;
     }
+
+    if (!response.ok) throw new Error("Failed to fetch bookings");
+
+    const data = await response.json();
+    setBookings(data);
+  } catch (error) {
+    toast({
+      title: "Error",
+      description: "Failed to fetch bookings",
+      variant: "destructive",
+    });
+  } finally {
+    setIsLoading(false);
   }
+};
+
 
   const updateBookingStatus = async (id: string, status: Booking['status']) => {
     try {
